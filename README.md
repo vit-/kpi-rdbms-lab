@@ -1,1 +1,1 @@
-# kpi-rdbms-lab
+This repo contains labs for KPI RDBMS course.
