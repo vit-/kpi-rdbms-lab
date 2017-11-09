@@ -18,7 +18,8 @@ create table CLIENT
 
 create table EMPLOYEE
 (
-	ID NUMBER not null,
+	ID NUMBER not null
+		primary key,
 	LASTNAME VARCHAR2(64) not null,
 	NAME VARCHAR2(64),
 	BORN_ON DATE not null,
@@ -30,15 +31,6 @@ create table EMPLOYEE
 		constraint EMPLOYEE_WORKPLACE_ID_FK
 			references WORKPLACE
 )
-/
-
-create unique index EMPLOYEE_ID_UINDEX
-	on EMPLOYEE (ID)
-/
-
-alter table EMPLOYEE
-	add constraint EMPLOYEE_ID_PK
-		primary key (ID)
 /
 
 create table "ORDER"
