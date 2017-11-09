@@ -1,105 +1,71 @@
-create table product
+create table WORKPLACE
 (
-	id numeric not null
-		constraint product_pkey
-			primary key,
-	name varchar(256) not null,
-	price numeric,
-	amount numeric,
-	order_id numeric not null
+	ID NUMBER not null
+		primary key,
+	NAME VARCHAR2(32)
 )
-;
+/
 
-create unique index product_id_uindex
-	on product (id)
-;
-
-create table client
+create table CLIENT
 (
-	id numeric not null
-		constraint client_pkey
-			primary key,
-	name varchar(256) not null,
-	tel char,
-	address varchar(512)
+	ID NUMBER not null
+		primary key,
+	NAME VARCHAR2(256) not null,
+	TEL CHAR(10),
+	ADDRESS VARCHAR2(512)
 )
-;
+/
 
-create unique index client_id_uindex
-	on client (id)
-;
-
-create table "order"
+create table EMPLOYEE
 (
-	id numeric not null
-		constraint order_pkey
-			primary key,
-	created_on timestamp default now() not null,
-	shipped_on timestamp,
-	client_id numeric not null
-		constraint order_client_id_fk
-			references client,
-	employee_id numeric
+	ID NUMBER not null,
+	LASTNAME VARCHAR2(64) not null,
+	NAME VARCHAR2(64),
+	BORN_ON DATE not null,
+	JOINED_ON DATE,
+	PARENT_ID NUMBER
+		constraint EMPLOYEE_EMPLOYEE_ID_FK
+			references EMPLOYEE,
+	WORKPLACE_ID NUMBER not null
+		constraint EMPLOYEE_WORKPLACE_ID_FK
+			references WORKPLACE
 )
-;
+/
 
-create unique index order_id_uindex
-	on "order" (id)
-;
+create unique index EMPLOYEE_ID_UINDEX
+	on EMPLOYEE (ID)
+/
 
-alter table product
-	add constraint product_order_id_fk
-		foreign key (order_id) references "order"
-;
+alter table EMPLOYEE
+	add constraint EMPLOYEE_ID_PK
+		primary key (ID)
+/
 
-create table employee
+create table "ORDER"
 (
-	id numeric not null
-		constraint employee_pkey
-			primary key,
-	surname varchar(32) not null,
-	name varchar(32),
-	born_on timestamp not null,
-	joined_on timestamp,
-	parent_id integer
-		constraint employee_employee_id_fk
-			references employee,
-	workplace_id numeric not null
+	ID NUMBER not null
+		primary key,
+	CREATED_ON DATE not null,
+	SHIPPED_ON DATE,
+	CLIENT_ID NUMBER not null
+		constraint ORDER_CLIENT_ID_FK
+			references CLIENT,
+	EMPLOYEE_ID NUMBER
+		constraint ORDER_EMPLOYEE_ID_FK
+			references EMPLOYEE
 )
-;
+/
 
-create unique index employee_id_uindex
-	on employee (id)
-;
-
-create unique index employee_workplace_id_uindex
-	on employee (workplace_id)
-;
-
-create index employee_name_surname_index
-	on employee (name, surname)
-;
-
-alter table "order"
-	add constraint order_employee_id_fk
-		foreign key (employee_id) references employee
-;
-
-create table workplace
+create table PRODUCT
 (
-	id numeric not null
-		constraint workplace_pkey
-			primary key,
-	name varchar(32)
+	ID NUMBER not null
+		primary key,
+	NAME VARCHAR2(256) not null,
+	PRICE NUMBER,
+	AMOUNT NUMBER,
+	ORDER_ID NUMBER not null
+		constraint PRODUCT_ORDER_ID_FK
+			references "ORDER"
 )
-;
-
-create unique index workplace_id_uindex
-	on workplace (id)
-;
-
-alter table employee
-	add constraint employee_workplace_id_fk
-		foreign key (workplace_id) references workplace
-;
+/
 
