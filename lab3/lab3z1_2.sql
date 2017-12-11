@@ -1,13 +1,6 @@
--- How to implement user prompt?! SQL is not interactive!
-
-INSERT INTO EMPLOYEE (LAST_NAME, ID, DEPT_ID) VALUES ('Alice', 200, 10)
+﻿ACCEPT user_id PROMPT 'Enter student ID:'
+ACCEPT last_name PROMPT 'Enter last name:'
+ACCEPT dept_id PROMPT 'Enter department ID:'
+INSERT INTO EMPLOYEE (ID, USER_ID, LAST_NAME, DEPT_ID)
+VALUES (&user_id, &user_id, '&last_name', &dept_id)
 /
-
-INSERT INTO EMPLOYEE (LAST_NAME, ID, DEPT_ID) VALUES ('Bob', 201, 11)
-/
--- queries above ^^ fail because USER_ID is required
-
-INSERT INTO DEPARTMENT (ID, NAME) VALUES (10, 'Applied Math faculty')
-/
--- query above ^^ fails because it violates REGION_ID unique constraint.
--- there's already 'IT faculty' present in the table with REGION_ID=NULL
