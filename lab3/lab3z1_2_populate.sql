@@ -1,0 +1,9 @@
+INSERT INTO EMPLOYEE (ID, USER_ID, LAST_NAME, DEPT_ID)
+VALUES (200, 200, 'Alice', 10)
+/
+
+INSERT INTO EMPLOYEE (ID, USER_ID, LAST_NAME, DEPT_ID)
+VALUES (201, 201, 'Bob', 11)
+/
+
+-- ^^ fails due to missing region 11
