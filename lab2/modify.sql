@@ -23,4 +23,4 @@ DROP TABLE EMPLOYEE
 
 DROP TABLE DEPARTMENT
 /
--- query above ^^ fail because table WORKER refers to DEPARTMENT.
+-- query above ^^ fails because table WORKER refers to DEPARTMENT.
